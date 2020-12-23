@@ -1,12 +1,7 @@
 export const videoPlayerInit = () => {
 
-    // video-player
-    // video-button__play
-    // video-button__stop
-    // video-time__passed
-    // video-progress
-    //     video - time__total
 
+    //Получаем элементы с файла index.html 
     const videoPlayer = document.querySelector('.video-player');
     //console.log(videoPlayer);//videoPlayer.js:11 <video src=​"video/​rocket_launching.mp4" class=​"video-player" poster=​"video/​play.svg" data-vscid=​"dn0qzp0ma">​</video>​
 
@@ -24,22 +19,28 @@ export const videoPlayerInit = () => {
     //console.log(videoProgress); //videoPlayer.js:23 <input type=​"range" class=​"video-progress" min=​"0" max=​"100" step=​"0.1" value=​"0">​
 
     const videoTimeTotal = document.querySelector('.video-time__total');
-    console.log(videoTimeTotal); //videoPlayer.js:27 <p class=​"video-time video-time__total">​00:00​</p>​
+    //console.log(videoTimeTotal); //videoPlayer.js:22 <p class=​"video-time video-time__total">​00:00​</p>​
 
+    const videoFullscreen = document.querySelector('.video-fullscreen');
+    console.log(videoFullscreen); //5videoPlayer.js:27<span class="fa fa-window-maximize video__icon video-fullscreen"></span>
 
+    const videoVolume = document.querySelector('.video__volume');
+    //console.log(videoVolume); //<input type="range" class="video__volume" min="0" max="100" step="1" value="100%">
+
+    //смена иконки паузы и воспроизведения 
     const toggleIcon = () => {
-        if (videoPlayer.paused) { // если видео на паузе
-            videoButtonPlay.classList.remove('fa-pause'); //удаляем иконку на паузе 
+            if (videoPlayer.paused) { // если видео на паузе
+                videoButtonPlay.classList.remove('fa-pause'); //удаляем иконку на паузе 
 
-            videoButtonPlay.classList.add('fa-play'); //добавляем  иконку play паузе 
+                videoButtonPlay.classList.add('fa-play'); //добавляем  иконку play паузе 
 
-        } else { // если видео не на паузе
-            videoButtonPlay.classList.add('fa-pause'); //удаляем иконку на паузе 
+            } else { // если видео не на паузе
+                videoButtonPlay.classList.add('fa-pause'); //удаляем иконку на паузе 
 
-            videoButtonPlay.classList.remove('fa-play'); //добавляем  иконку play паузе 
+                videoButtonPlay.classList.remove('fa-play'); //добавляем  иконку play паузе 
+            }
         }
-    }
-
+        //работа плеера по клику
     const togglePlay = () => {
         if (videoPlayer.paused) {
             videoPlayer.play();
@@ -56,6 +57,11 @@ export const videoPlayerInit = () => {
         }
         // условие ? (условие верно) : (условие лож)
     const addZero = n => n < 10 ? '0' + n : n; // если число n меньше 10 тогда возвращаем '0' + n; если больше 10 тогда возвращаем само число n
+
+    const changeValue = () => {
+        const valueVolume = videoVolume.value;
+        videoPlayer.volume = valueVolume / 100;
+    };
 
     // Вешаем обработчик событий по клику на кнопку videoPlayer 
     videoPlayer.addEventListener('click', togglePlay);
@@ -99,5 +105,19 @@ export const videoPlayerInit = () => {
         console.log(value);
 
         videoPlayer.currentTime = (value * duration) / 100;
-    })
+    });
+
+
+
+    videoVolume.addEventListener('input', changeValue);
+
+    //вешаем обработчик событий на videoFullscreen по клику будем делать наше видео полноэкранным
+    videoFullscreen.addEventListener('click', () => {
+        videoPlayer.requestFullscreen();
+    });
+
+    videoPlayer.addEventListener('volumechange', () => {
+        videoVolume.value = Math.round(videoPlayer.volume * 100);
+    });
+    changeValue();
 };

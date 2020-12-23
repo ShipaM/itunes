@@ -58,6 +58,13 @@
                         <p class="video-time video-time__passed">00:00</p>
                         <input type="range" class="video-progress" min="0" max="100" step="0.1" value="0">
                         <p class="video-time video-time__total">00:00</p>
+                        <span class="video__icon fa fa-volume-down"></span>
+                        <!-- /.video__icon fa fa-volume-down -->
+                        <input type="range" class="video__volume" min="0" max="100" step="1" value="50">
+                        <span class="video__icon fa fa-volume-up"></span>
+                        <!-- /.video__icon fa fa-volume-up -->
+                        <span class="fa fa-window-maximize video__icon video-fullscreen"></span>
+                        <!-- /.fa fa-window-maximize video__icon video-fullscreen -->
                     </nav>
                 </div>
             </div>
@@ -85,6 +92,7 @@
                         <div class="audio-progress__timing"></div>
                     </div>
                     <span class="audio-time audio-time__total">00:00</span>
+
                 </nav>
             </footer>
         </article>
@@ -174,6 +182,15 @@
             </div>
             <footer class="footer-fix radio-footer">
                 <button class="radio-stop fa fa-play"></button>
+                <div class="audio__control">
+                    <!-- /.audio__control -->
+                    <span class="audio__icon fa fa-volume-down"></span>
+                    <!-- /.video__icon fa fa-volume-down -->
+                    <input type="range" class="audio__volume" min="0" max="100" step="1" value="100">
+                    <span class="audio__icon fa fa-volume-up"></span>
+                    <!-- /.video__icon fa fa-volume-up -->
+                </div>
+
             </footer>
         </article>
     </main>

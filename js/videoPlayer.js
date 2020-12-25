@@ -120,4 +120,15 @@ export const videoPlayerInit = () => {
         videoVolume.value = Math.round(videoPlayer.volume * 100);
     });
     changeValue();
+
+
+    return () => {
+        videoPlayer.pause();
+        toggleIcon();
+    }
+
+    // videoPlayerInit.stop = () => {
+    //     videoPlayer.pause();
+    //     toggleIcon();
+    // }
 };

@@ -8,10 +8,13 @@ export const radioPlayerInit = () => {
     const radioItem = document.querySelectorAll('.radio-item');
     const radioStop = document.querySelector('.radio-stop');
     const audioVolume = document.querySelector('.audio__volume');
+    const radioMute = document.querySelector('.radio-mute');
 
     const audio = new Audio(); //В нашу переменную audio попадает объект у которого есть различные методы и свойства
 
     audio.type = 'audio/aac'; //тип аудио
+
+    //let tempVolume = audio.volume;
 
     radioStop.disabled = true;
 
@@ -64,10 +67,25 @@ export const radioPlayerInit = () => {
 
     audioVolume.addEventListener('input', () => {
         audio.volume = audioVolume.value / 100
+        audio.muted = false
     });
 
     audio.volume = 0.5;
 
     audioVolume.value = audio.volume * 100;
 
+
+    radioMute.addEventListener('click', () => {
+        audio.muted = !audio.muted
+    });
+
+    return () => {
+        audio.pause();
+        changeIconPlay();
+    }
+
+    // radioPlayerInit.stop= () => {
+    //     audio.pause();
+    //     changeIconPlay();
+    // }
 }
